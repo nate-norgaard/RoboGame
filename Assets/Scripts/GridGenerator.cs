@@ -32,7 +32,7 @@ public class GridGenerator : MonoBehaviour
 		{
 			for (int r = 0; r <= rows; r++)
 			{
-				GridCell gridCell = Instantiate(gridCellPrefab, grid.transform.position + new Vector3(-r, 0, c), grid.transform.rotation) as GridCell;
+				GridCell gridCell = Instantiate(gridCellPrefab, grid.transform.position + new Vector3(c, 0, r), grid.transform.rotation) as GridCell;
 				grid.GridCells[c, r] = gridCell;
 				gridCell.transform.parent = grid.transform;
 			}
