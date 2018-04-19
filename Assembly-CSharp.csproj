@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Coord2D.cs" />
+     <Compile Include="Assets\Scripts\Direction.cs" />
      <Compile Include="Assets\Scripts\Grid.cs" />
      <Compile Include="Assets\Scripts\GridCell.cs" />
      <Compile Include="Assets\Scripts\GridGenerator.cs" />
