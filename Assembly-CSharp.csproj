@@ -45,11 +45,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Action.cs" />
+     <Compile Include="Assets\Scripts\ActionUI.cs" />
      <Compile Include="Assets\Scripts\Coord2D.cs" />
+     <Compile Include="Assets\Scripts\DemoMode.cs" />
      <Compile Include="Assets\Scripts\Direction.cs" />
      <Compile Include="Assets\Scripts\Grid.cs" />
+     <Compile Include="Assets\Scripts\GridAgent.cs" />
      <Compile Include="Assets\Scripts\GridCell.cs" />
      <Compile Include="Assets\Scripts\GridGenerator.cs" />
+     <Compile Include="Assets\Scripts\PlayerRoboController.cs" />
+     <Compile Include="Assets\Scripts\PlayerUI.cs" />
+     <Compile Include="Assets\Scripts\RoboController.cs" />
+     <Compile Include="Assets\Scripts\RoboSpawn.cs" />
+     <Compile Include="Assets\Scripts\RoundController.cs" />
+     <Compile Include="Assets\Scripts\TurnBasedSystem.cs" />
+     <Compile Include="Assets\Scripts\TurnController.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>F:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

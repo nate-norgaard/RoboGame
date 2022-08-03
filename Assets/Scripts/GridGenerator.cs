@@ -14,10 +14,10 @@ public class GridGenerator : MonoBehaviour
 
 	public void Awake()
 	{
-		GenerateGrid();
+		//GenerateGrid();
 	}
 
-	public void GenerateGrid()
+	public Grid GenerateGrid()
 	{
 		string gridName = "Grid";
 		if (transform.FindChild(gridName))
@@ -27,7 +27,7 @@ public class GridGenerator : MonoBehaviour
 
 		Grid grid = Instantiate(gridPrefab, transform.position, transform.rotation) as Grid;
 		grid.name = gridName;
-		grid.Init(rows, columns);
+		grid.Initialize(rows, columns);
 		grid.transform.parent = transform;
 
 		System.Random random = new System.Random(seed);
@@ -60,5 +60,7 @@ public class GridGenerator : MonoBehaviour
 			gridCell.SouthWall = false;
 			gridCell.Floor = false;
 		}
+
+		return grid;
 	}
 }

@@ -1,42 +1,57 @@
-﻿[System.Serializable]
-public struct Coord2D
-{
-	public int x;
-	public int y;
+﻿using UnityEngine;
 
-	public Coord2D(int _x, int _y)
+[System.Serializable]
+public struct Coord2d
+{
+	public int X { get; set; }
+	public int Y { get; set; }
+
+	public float Magnitude { get { return Mathf.Sqrt(X * X + Y * Y); } }
+	public Vector3 Position { get { return new Vector3(X, 0, Y); } }
+
+	public Coord2d(int x, int y)
 	{
-		x = _x;
-		y = _y;
+		X = x;
+		Y = y;
 	}
 
 	public override bool Equals(object obj)
 	{
-		return this == (Coord2D)obj;
+		return this == (Coord2d)obj;
 	}
 
 	public override int GetHashCode()
 	{
-		return x * y;
+		return X * Y;
 	}
 
-	public static bool operator ==(Coord2D c1, Coord2D c2)
+	public static bool operator ==(Coord2d c1, Coord2d c2)
 	{
-		return c1.x == c2.x && c1.y == c2.y;
+		return c1.X == c2.X && c1.Y == c2.Y;
 	}
 
-	public static bool operator !=(Coord2D c1, Coord2D c2)
+	public static bool operator !=(Coord2d c1, Coord2d c2)
 	{
 		return !(c1 == c2);
 	}
 
-	public static Coord2D operator +(Coord2D c1, Coord2D c2)
+	public static Coord2d operator +(Coord2d c1, Coord2d c2)
 	{
-		return new Coord2D(c1.x + c2.x, c1.y + c2.y);
+		return new Coord2d(c1.X + c2.X, c1.Y + c2.Y);
 	}
 
-	public static Coord2D operator -(Coord2D c1, Coord2D c2)
+	public static Coord2d operator -(Coord2d c1, Coord2d c2)
 	{
-		return new Coord2D(c1.x - c2.x, c1.y - c2.y);
+		return new Coord2d(c1.X - c2.X, c1.Y - c2.Y);
+	}
+
+	public static Coord2d operator *(Coord2d coord, int factor)
+	{
+		return new Coord2d(coord.X * factor, coord.Y * factor);
+	}
+
+	public static Coord2d operator /(Coord2d coord, int divisor)
+	{
+		return new Coord2d(coord.X / divisor, coord.Y / divisor);
 	}
 }

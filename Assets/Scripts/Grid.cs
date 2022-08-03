@@ -3,43 +3,72 @@ using System.Collections;
 
 public class Grid : MonoBehaviour
 {
-	public int Rows { get; private set; }
-	public int Columns { get; private set; }
+	public int Rows;
+	public int Columns;
+	public GridCell[,] GridCells;
 
-	public GridCell[,] GridCells { get; private set; }
+	private int XSize { get { return Columns + 1; } }
+	private int YSize { get { return Rows + 1; } }
 
-	public void Init(int initRows, int initColumns)
+	public void Initialize(int initRows, int initColumns)
 	{
 		Rows = initRows;
 		Columns = initColumns;
-		GridCells = new GridCell[Columns + 1, Rows + 1]; // add one for walls on north and east sides
+		GridCells = new GridCell[XSize, YSize]; // add one for walls on north and east sides
 	}
 
-	public GridCell GetCell(Coord2D coord)
+	public bool TryGetCell(Coord2d coord, out GridCell gridCell)
 	{
-		return GridCells[coord.x, coord.y];
+		gridCell = null;
+		if (coord.X >= 0 && coord.X < XSize
+			&& coord.Y >= 0 && coord.Y < YSize)
+		{
+			gridCell = GetCell(coord);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
-	public bool Wall(Coord2D coord, Direction direction)
+	public GridCell GetCell(Coord2d coord)
 	{
-		Coord2D shift;
+		return GridCells[coord.X, coord.Y];
+	}
+
+	public GridCell GetCell(Coord2d coord, Direction4d direction)
+	{
+		Coord2d directionVector = Direction.ToVector(direction);
+		return GetCell(coord + directionVector);
+	}
+
+	public bool Wall(Coord2d coord, Direction4d direction)
+	{
+		Coord2d shift;
 		switch (direction)
 		{
-			case Direction.East:
-				shift = new Coord2D(1, 0);
+			case Direction4d.East:
+				shift = new Coord2d(1, 0);
 				return GetCell(coord + shift).WestWall;
 
-			case Direction.North:
-				shift = new Coord2D(0, 1);
+			case Direction4d.North:
+				shift = new Coord2d(0, 1);
 				return GetCell(coord + shift).SouthWall;
 
-			case Direction.West:
+			case Direction4d.West:
 				return GetCell(coord).WestWall;
 
-			case Direction.South:
+			case Direction4d.South:
 				return GetCell(coord).SouthWall;
 		}
 
 		throw new System.Exception("Not reached! Not a cardinal direction!");
+	}
+
+	public Vector2 Point(Coord2d coord)
+	{
+		GridCell cell = GetCell(coord);
+		return new Vector2(cell.transform.position.x, cell.transform.position.y);
 	}
 }
